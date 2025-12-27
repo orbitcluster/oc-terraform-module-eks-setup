@@ -1,7 +1,10 @@
 name: Release
 
 on:
-  push:
+  workflow_run:
+    workflows: ["eks-ci", "pre-commit"]
+    types:
+      - completed
     branches:
       - main
   pull_request:
@@ -13,6 +16,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    if: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') || github.event_name == 'pull_request' }}
     permissions:
       contents: write # to be able to publish a GitHub release
       issues: write # to be able to comment on released issues
