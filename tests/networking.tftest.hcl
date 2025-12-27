@@ -33,7 +33,7 @@ run "custom_vpc_configuration" {
     condition     = var.vpc_cidr == "10.1.0.0/16"
     error_message = "VPC CIDR did not match custom value"
   }
-  
+
   assert {
     condition     = var.single_nat_gateway == true
     error_message = "single_nat_gateway should be true"
