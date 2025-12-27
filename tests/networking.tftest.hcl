@@ -49,7 +49,7 @@ run "load_balancers_enabled" {
     enable_network_load_balancer = true
     alb_http_enabled             = true
     alb_https_enabled            = true
-    alb_certificate_arn          = "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012" 
+    alb_certificate_arn          = "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012"
   }
 
   assert {
@@ -71,7 +71,7 @@ run "vpc_endpoints_enabled" {
     enable_vpc_endpoints = true
     vpc_endpoints = {
       ssm         = true
-      rsync       = false 
+      rsync       = false
       s3          = true
       ec2         = true
     }
