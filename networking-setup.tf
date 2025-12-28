@@ -1,5 +1,5 @@
 module "networking" {
-  source = "git::https://github.com/orbitcluster/oc-terraform-module-networking.git?ref=14905086e3c882402092f2a80e18e652b970fdd1"
+  source = "git::https://github.com/orbitcluster/oc-terraform-module-networking.git?ref=0c56059d33a5d00846ffea5afc1845d4b1d80ee8"
 
   # Basic VPC Info
   vpc_cidr             = var.vpc_cidr
