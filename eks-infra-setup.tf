@@ -11,7 +11,7 @@ module "eks" {
   vpc_id                     = module.networking.vpc_id
   cluster_control_plane_subnet_ids = module.networking.private_subnet_ids
   private_subnet_ids         = module.networking.private_subnet_ids
-  
+
   # Security Groups (From Networking Module)
   node_security_group_id            = module.networking.node_security_group_id
   control_plane_security_group_id   = module.networking.control_plane_security_group_id
