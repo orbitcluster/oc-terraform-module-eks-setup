@@ -4,6 +4,17 @@ variables {
   env    = "test"
 }
 
+override_module {
+  target = module.networking
+  outputs = {
+    vpc_id                          = "vpc-mock-12345"
+    private_subnet_ids              = ["subnet-mock-1", "subnet-mock-2"]
+    public_subnet_ids               = ["subnet-mock-public-1", "subnet-mock-public-2"]
+    node_security_group_id          = "sg-mock-node"
+    control_plane_security_group_id = "sg-mock-control-plane"
+  }
+}
+
 run "verify_naming_standard" {
   command = plan
 
