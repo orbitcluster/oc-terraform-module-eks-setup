@@ -6,6 +6,28 @@ variables {
   app_id = "testapp"
 }
 
+mock_provider "aws" {}
+
+override_module {
+  target = module.networking
+  outputs = {
+    vpc_id                          = "vpc-mock-12345"
+    private_subnet_ids              = ["subnet-mock-1", "subnet-mock-2", "subnet-mock-3"]
+    public_subnet_ids               = ["subnet-mock-public-1", "subnet-mock-public-2"]
+    node_security_group_id          = "sg-mock-node"
+    control_plane_security_group_id = "sg-mock-control-plane"
+  }
+}
+
+override_module {
+  target = module.eks
+  outputs = {
+    cluster_name                       = "mock-cluster"
+    cluster_endpoint                   = "https://mock.k8s.local"
+    cluster_certificate_authority_data = "mock-data"
+  }
+}
+
 run "default_configuration" {
   command = plan
 
