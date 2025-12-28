@@ -2,7 +2,7 @@
 variable "cluster_kubernetes_version" {
   description = "Kubernetes <major>.<minor> version to use for the cluster"
   type        = string
-  default     = "1.33"
+  default     = "1.30"
 }
 
 variable "cluster_access_entries" {
