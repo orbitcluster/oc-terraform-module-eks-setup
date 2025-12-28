@@ -86,4 +86,3 @@ variable "iam_role_permissions_boundary" {
   type        = string
   default     = null
 }
-
