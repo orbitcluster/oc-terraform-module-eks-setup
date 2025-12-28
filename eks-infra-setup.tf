@@ -2,7 +2,6 @@ module "eks" {
   source = "git::https://github.com/orbitcluster/oc-terraform-module-eks.git?ref=19aa5393c9e264b9b111104790a8889807f8ffd0"
 
   # Basic Cluster Info
-  cluster_name               = var.cluster_name
   cluster_kubernetes_version = var.cluster_kubernetes_version
   env                        = var.env
   bu_id                      = var.bu_id
@@ -24,7 +23,6 @@ module "eks" {
   max_size            = var.max_size
   desired_size        = var.desired_size
   max_pods_per_node   = var.max_pods_per_node
-  extra_nodegroups    = var.extra_nodegroups
 
   # Access & Auth
   cluster_access_entries        = var.cluster_access_entries

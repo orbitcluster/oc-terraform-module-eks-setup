@@ -1,7 +1,3 @@
-variable "cluster_name" {
-  description = "Name to use for the cluster"
-  type        = string
-}
 
 variable "cluster_kubernetes_version" {
   description = "Kubernetes <major>.<minor> version to use for the cluster"
@@ -15,11 +11,6 @@ variable "cluster_access_entries" {
   default     = {}
 }
 
-variable "extra_nodegroups" {
-  type        = map(string)
-  description = "Extra nodegroups to use for the cluster"
-  default     = {}
-}
 
 variable "cluster_enabled_log_types" {
   description = "List of log types to enable for the cluster"
