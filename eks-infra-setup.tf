@@ -35,6 +35,9 @@ module "eks" {
   cloudinit_pre_nodeadm  = var.cloudinit_pre_nodeadm
   cloudinit_post_nodeadm = var.cloudinit_post_nodeadm
 
+  # Tags
+  tags = var.tags
+
   # Load Balancing
   # target_group_arns = var.target_group_arns
 }
