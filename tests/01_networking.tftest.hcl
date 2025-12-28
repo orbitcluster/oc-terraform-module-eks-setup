@@ -6,13 +6,6 @@ variables {
   app_id = "testapp"
 }
 
-override_data {
-  target = module.networking.data.aws_availability_zones.available
-  values = {
-    names = ["us-east-1a", "us-east-1b"]
-  }
-}
-
 run "default_configuration" {
   command = plan
 
