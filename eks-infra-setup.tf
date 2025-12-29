@@ -1,5 +1,5 @@
 module "eks" {
-  source = "git::https://github.com/orbitcluster/oc-terraform-module-eks.git?ref=10757af5c06a1fd85604e799c7dbc88df4cf1a3e"
+  source = "git::https://github.com/orbitcluster/oc-terraform-module-eks.git?ref=a4faee84e67711bb6bf0e2a3e20b7a4176308f24"
 
   # Basic Cluster Info
   cluster_kubernetes_version = var.cluster_kubernetes_version
@@ -39,6 +39,12 @@ module "eks" {
   # Tags
   tags = var.tags
 
-  # Load Balancing
-  # target_group_arns = var.target_group_arns
+  # What type of node group to use
+  # True: If you want to use EKS to manage your node group.
+  #       Automated Lifecycle: AWS creates and manages the EC2 Auto Scaling Group (ASG) for you.
+  #       Easy Upgrades: One-click rolling updates. AWS automatically cordons, drains, and terminates nodes to replace them with new versions.
+  # False: If you want to manage your node group yourself.
+  #       Manual Lifecycle: You define and manage the ASG yourself using Terraform (like in your current code).
+  #       Manual Upgrades: You are responsible for cycling nodes (cordoning, draining, and terminating) during upgrades or utilizing ASG "Instance Refresh" features manually.
+  is_eks_managed_node_group = var.is_eks_managed_node_group
 }
