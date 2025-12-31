@@ -15,7 +15,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_eks"></a> [eks](#module\_eks) | git::https://github.com/orbitcluster/oc-terraform-module-eks.git | 29571ba862858cea6d407d72c8916bdfb14abbd5 |
+| <a name="module_eks"></a> [eks](#module\_eks) | git::https://github.com/orbitcluster/oc-terraform-module-eks.git | fafcc357761bfd135447e20f88712cc6e64a6f49 |
 | <a name="module_networking"></a> [networking](#module\_networking) | git::https://github.com/orbitcluster/oc-terraform-module-networking.git | 1336a1ef0fc244b82e2b5e76ec0bd738703dc5df |
 
 ## Resources
