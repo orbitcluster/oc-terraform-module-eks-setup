@@ -11,6 +11,27 @@ variable "cluster_access_entries" {
   default     = {}
 }
 
+variable "cluster_endpoint_access_type" {
+  description = <<-EOT
+    Type of API server endpoint access:
+    - "private": Only private endpoint (accessible only within VPC/VPN)
+    - "private_with_public_cidrs": Private endpoint + public restricted to specific CIDRs
+    - "public": Public endpoint open to all (0.0.0.0/0), no private access
+  EOT
+  type        = string
+  default     = "private"
+
+  validation {
+    condition     = contains(["private", "private_with_public_cidrs", "public"], var.cluster_endpoint_access_type)
+    error_message = "cluster_endpoint_access_type must be 'private', 'private_with_public_cidrs', or 'public'"
+  }
+}
+
+variable "cluster_endpoint_public_access_cidrs" {
+  description = "List of CIDR blocks allowed to access the public API server endpoint. Required when access_type is 'private_with_public_cidrs'."
+  type        = list(string)
+  default     = []
+}
 
 variable "cluster_enabled_log_types" {
   description = "List of log types to enable for the cluster"
