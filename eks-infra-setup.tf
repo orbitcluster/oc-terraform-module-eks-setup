@@ -1,5 +1,5 @@
 module "eks" {
-  source = "git::https://github.com/orbitcluster/oc-terraform-module-eks.git?ref=591e815ab501772dde2c9f328a668188253b6330"
+  source = "git::https://github.com/orbitcluster/oc-terraform-module-eks.git?ref=150f8c0dcec2623bf3c828e16217666f127a4816"
 
   # Basic Cluster Info
   cluster_kubernetes_version = var.cluster_kubernetes_version
@@ -26,8 +26,10 @@ module "eks" {
   max_pods_per_node  = var.max_pods_per_node
 
   # Access & Auth
-  cluster_access_entries        = var.cluster_access_entries
-  iam_role_permissions_boundary = var.iam_role_permissions_boundary
+  cluster_access_entries               = var.cluster_access_entries
+  cluster_endpoint_access_type         = var.cluster_endpoint_access_type
+  cluster_endpoint_public_access_cidrs = var.cluster_endpoint_public_access_cidrs
+  iam_role_permissions_boundary        = var.iam_role_permissions_boundary
 
   # Logging & Monitoring
   cluster_enabled_log_types = var.cluster_enabled_log_types
