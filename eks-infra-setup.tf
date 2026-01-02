@@ -1,5 +1,5 @@
 module "eks" {
-  source = "git::https://github.com/orbitcluster/oc-terraform-module-eks.git?ref=681a1e5c9fd505c87d6249f7fea41214e19a2f25"
+  source = "git::https://github.com/orbitcluster/oc-terraform-module-eks.git?ref=591e815ab501772dde2c9f328a668188253b6330"
 
   # Basic Cluster Info
   cluster_kubernetes_version = var.cluster_kubernetes_version
