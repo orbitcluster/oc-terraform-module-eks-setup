@@ -20,7 +20,7 @@ override_module {
 }
 
 override_module {
-  target = module.eks
+  target = module.eks_infra
   outputs = {
     cluster_name                       = "mock-cluster"
     cluster_endpoint                   = "https://mock.k8s.local"
@@ -92,10 +92,10 @@ run "vpc_endpoints_enabled" {
     env                  = "prod"
     enable_vpc_endpoints = true
     vpc_endpoints = {
-      ssm         = true
-      rsync       = false
-      s3          = true
-      ec2         = true
+      ssm   = true
+      rsync = false
+      s3    = true
+      ec2   = true
     }
   }
 
