@@ -15,7 +15,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_eks_essential_addons"></a> [eks\_essential\_addons](#module\_eks\_essential\_addons) | git::https://github.com/orbitcluster/oc-terraform-essential-addons.git | dff5dd7b7d98bbf594fe5e85bd9328eec472b319 |
+| <a name="module_eks_essential_addons"></a> [eks\_essential\_addons](#module\_eks\_essential\_addons) | git::https://github.com/orbitcluster/oc-terraform-module-essential-addons.git | dff5dd7b7d98bbf594fe5e85bd9328eec472b319 |
 | <a name="module_eks_infra"></a> [eks\_infra](#module\_eks\_infra) | git::https://github.com/orbitcluster/oc-terraform-module-eks.git | 9ebf8528508d34a1dae4f27d31b6191e34eaff72 |
 | <a name="module_networking"></a> [networking](#module\_networking) | git::https://github.com/orbitcluster/oc-terraform-module-networking.git | 1336a1ef0fc244b82e2b5e76ec0bd738703dc5df |
 
