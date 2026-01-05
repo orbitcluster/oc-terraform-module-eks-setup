@@ -1,5 +1,5 @@
 module "eks_essential_addons" {
-  source = "git::https://github.com/orbitcluster/oc-terraform-essential-addons.git?ref=072d83b598eb57134ccf752da8c6cdbf86d50303"
+  source = "git::https://github.com/orbitcluster/oc-terraform-essential-addons.git?ref=dff5dd7b7d98bbf594fe5e85bd9328eec472b319"
 
   # Basic Cluster Info
   env    = var.env
@@ -12,7 +12,11 @@ module "eks_essential_addons" {
   cluster_certificate_authority_data = module.eks_infra.cluster_certificate_authority_data
   cluster_oidc_provider_arn          = module.eks_infra.cluster_oidc_provider_arn
   cluster_oidc_issuer_url            = module.eks_infra.cluster_oidc_issuer_url
-  tags                               = var.tags
+
+  vpc_id                    = module.networking.vpc_id
+  cluster_service_ipv4_cidr = module.eks_infra.cluster_service_cidr
+
+  tags = var.tags
 
   depends_on = [module.eks_infra]
 
