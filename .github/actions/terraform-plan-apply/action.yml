@@ -1,0 +1,63 @@
+---
+name: Terraform
+description: "Terraform"
+
+inputs:
+  bucket_name:
+    description: "Name of the S3 bucket"
+    required: true
+    type: string
+  tfvar_file_path:
+    description: "Path to the tfvar file"
+    required: true
+    type: string
+  approvers:
+    description: "List of approvers"
+    required: true
+    type: string
+  directory:
+    description: "Directory to run Terraform"
+    required: true
+    type: string
+  component:
+    description: "Component name"
+    required: true
+    type: string
+  cluster_name:
+    description: "Name of the cluster"
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    - name: Copy tfvar file
+      shell: bash
+      run: |
+        cp ${{ inputs.tfvar_file_path }} ${{ inputs.directory }}
+
+    - name: Plan Terraform
+      if: github.event_name == 'push' && github.ref != 'refs/heads/main'
+      uses: ./.github/actions/plan-tf
+      with:
+        bucket_name: ${{ inputs.bucket_name }}
+        tfvar_file_path: ${{ inputs.tfvar_file_path }}
+        directory: ${{ inputs.directory }}
+        component: ${{ inputs.component }}
+        cluster_name: ${{ inputs.cluster_name }}
+
+    - name: Request approval
+      if: github.event_name == 'push' && github.ref != 'refs/heads/main'
+      uses: trstringer/manual-approval@v1
+      with:
+        approvers: ${{ inputs.approvers }}
+
+    - name: Apply Terraform
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: ./.github/actions/apply-tf
+      with:
+        bucket_name: ${{ inputs.bucket_name }}
+        tfvar_file_path: ${{ inputs.tfvar_file_path }}
+        directory: ${{ inputs.directory }}
+        component: ${{ inputs.component }}
+        cluster_name: ${{ inputs.cluster_name }}

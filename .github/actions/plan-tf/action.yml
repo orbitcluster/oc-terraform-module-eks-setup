@@ -1,0 +1,40 @@
+name: "Plan Terraform"
+description: "Plan up Terraform"
+inputs:
+  bucket_name:
+    description: "Name of the S3 bucket"
+    required: true
+    type: string
+  tfvar_file_path:
+    description: "Path to the tfvar file"
+    required: true
+    type: string
+  directory:
+    description: "Directory to run Terraform"
+    required: true
+    type: string
+  component:
+    description: "Component name"
+    required: true
+    type: string
+  cluster_name:
+    description: "Name of the cluster"
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    - name: Terraform Init
+      shell: bash
+      working-directory: ${{ inputs.directory }}
+      run: terraform init \
+        -backend-config="bucket=${{ inputs.bucket_name }}" \
+        -backend-config="key=${{ inputs.cluster_name }}/${{ inputs.component }}/terraform.tfstate"
+
+    - name: Terraform Plan
+      shell: bash
+      working-directory: ${{ inputs.directory }}
+      run: terraform plan \
+        -backend-config="bucket=${{ inputs.bucket_name }}" \
+        -backend-config="key=${{ inputs.cluster_name }}/${{ inputs.component }}/terraform.tfstate"
