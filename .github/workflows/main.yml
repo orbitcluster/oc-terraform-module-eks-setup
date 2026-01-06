@@ -33,7 +33,7 @@ jobs:
       - name: Checkout oc-terraform-module-eks-setup
         uses: actions/checkout@v4
         with:
-          repository: orbitclusteroc-terraform-module-eks-setup
+          repository: orbitcluster/oc-terraform-module-eks-setup
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Terraform
