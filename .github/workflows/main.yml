@@ -34,10 +34,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: orbitcluster/oc-terraform-module-eks-setup
+          path: oc-terraform-module-eks-setup
+          ref: dk/changestrategy
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Terraform
-        uses: ./.github/actions/terraform-setup
+        uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-setup
 
       - name: eks_infra
         uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-plan-apply
