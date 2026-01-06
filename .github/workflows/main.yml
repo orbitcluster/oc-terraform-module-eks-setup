@@ -46,7 +46,7 @@ jobs:
         with:
           bucket_name: ${{ inputs.bucket_name }}
           tfvar_file_path: ${{ inputs.tfvar_file_path }}
-          directory: ./oc-terraform-module-eks-setup/eks_infra
+          directory: ./oc-terraform-module-eks-setup/eks-infra
           approvers: ${{ inputs.approvers }}
           component: eks_infra
           cluster_name: ${{ inputs.cluster_name }}
