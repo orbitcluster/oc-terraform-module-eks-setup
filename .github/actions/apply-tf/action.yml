@@ -33,4 +33,4 @@ runs:
     - name: Terraform Apply
       shell: bash
       working-directory: ${{ inputs.directory }}
-      run: terraform apply --auto-approve -var-file="${{ inputs.tfvar_file_path }}" -backend-config="bucket=${{ inputs.bucket_name }}" -backend-config="key=${{ inputs.cluster_name }}/${{ inputs.component }}/terraform.tfstate"
+      run: terraform apply --auto-approve -var-file="${{ inputs.tfvar_file_path }}"
