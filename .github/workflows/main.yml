@@ -38,6 +38,13 @@ jobs:
           ref: dk/changestrategy
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          role-to-assume: ${{ secrets.OC_ROLE_TO_ASSUME }}
+          role-session-name: githubactions-${{ github.run_id }}
+
       - name: Setup Terraform
         uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-setup
 
