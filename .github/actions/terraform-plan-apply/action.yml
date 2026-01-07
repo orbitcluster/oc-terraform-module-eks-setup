@@ -37,7 +37,7 @@ runs:
         cp ${{ inputs.tfvar_file_path }} ${{ inputs.directory }}
 
     - name: Plan Terraform
-      if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref != 'refs/heads/main'
+      if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
       uses: ./oc-terraform-module-eks-setup/.github/actions/plan-tf
       with:
         bucket_name: ${{ inputs.bucket_name }}
