@@ -54,16 +54,16 @@ jobs:
       - name: Setup Terraform
         uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-setup
 
-      - name: Destroy eks_essential_addons
-        if: inputs.component == 'eks_essential_addons' || inputs.component == 'all'
-        uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-plan-destroy
-        with:
-          bucket_name: ${{ inputs.bucket_name }}
-          tfvar_file_path: ${{ inputs.tfvar_file_path }}
-          directory: ./oc-terraform-module-eks-setup/eks-essential-addons
-          approvers: ${{ inputs.approvers }}
-          component: eks_essential_addons
-          cluster_name: ${{ inputs.cluster_name }}
+      # - name: Destroy eks_essential_addons
+      #   if: inputs.component == 'eks_essential_addons' || inputs.component == 'all'
+      #   uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-plan-destroy
+      #   with:
+      #     bucket_name: ${{ inputs.bucket_name }}
+      #     tfvar_file_path: ${{ inputs.tfvar_file_path }}
+      #     directory: ./oc-terraform-module-eks-setup/eks-essential-addons
+      #     approvers: ${{ inputs.approvers }}
+      #     component: eks_essential_addons
+      #     cluster_name: ${{ inputs.cluster_name }}
 
       - name: Destroy eks_infra
         if: inputs.component == 'eks_infra' || inputs.component == 'all'
