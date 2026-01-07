@@ -23,8 +23,8 @@ inputs:
     description: "Component name"
     required: true
     type: string
-  cluster_name:
-    description: "Name of the cluster"
+  master_s3_directory:
+    description: "Name of the master s3 directory"
     required: true
     type: string
 
@@ -39,7 +39,7 @@ runs:
     - name: Terraform Init
       shell: bash
       working-directory: ${{ inputs.directory }}
-      run: terraform init -backend-config="bucket=${{ inputs.bucket_name }}" -backend-config="key=${{ inputs.cluster_name }}/${{ inputs.component }}/terraform.tfstate"
+      run: terraform init -backend-config="bucket=${{ inputs.bucket_name }}" -backend-config="key=${{ inputs.master_s3_directory }}/${{ inputs.component }}/terraform.tfstate"
 
     - name: Terraform Plan Destroy
       shell: bash
@@ -61,4 +61,4 @@ runs:
         tfvar_file_path: ${{ inputs.tfvar_file_path }}
         directory: ${{ inputs.directory }}
         component: ${{ inputs.component }}
-        cluster_name: ${{ inputs.cluster_name }}
+        master_s3_directory: ${{ inputs.master_s3_directory }}
