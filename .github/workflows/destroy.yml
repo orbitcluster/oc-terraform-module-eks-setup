@@ -23,6 +23,11 @@ on:
         description: "Component to destroy (eks_infra, eks_essential_addons, or all)"
         required: true
         type: string
+      module_ref:
+        description: "Branch/tag/ref of oc-terraform-module-eks-setup to use"
+        required: false
+        type: string
+        default: "main"
 
 permissions:
   id-token: write
@@ -41,7 +46,7 @@ jobs:
         with:
           repository: orbitcluster/oc-terraform-module-eks-setup
           path: oc-terraform-module-eks-setup
-          ref: dk/changestrategy
+          ref: ${{ inputs.module_ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Configure AWS Credentials
