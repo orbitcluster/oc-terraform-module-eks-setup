@@ -3,7 +3,11 @@ data "terraform_remote_state" "eks_infra" {
 
   config = {
     bucket = var.terraform_state_bucket
-    key    = "${var.cluster_name}/eks_infra/terraform.tfstate"
+    key    = "${data.external.master_s3_directory.result.master_s3_directory}/eks_infra/terraform.tfstate"
     region = var.aws_region
   }
+}
+
+data "external" "master_s3_directory" {
+  program = ["bash", "${path.module}/get_env.sh"]
 }

@@ -15,8 +15,8 @@ on:
         description: "List of approvers"
         required: true
         type: string
-      cluster_name:
-        description: "Name of the cluster"
+      master_s3_directory:
+        description: "Name of the master s3 directory"
         required: true
         type: string
       component:
@@ -59,16 +59,16 @@ jobs:
       - name: Setup Terraform
         uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-setup
 
-      # - name: Destroy eks_essential_addons
-      #   if: inputs.component == 'eks_essential_addons' || inputs.component == 'all'
-      #   uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-plan-destroy
-      #   with:
-      #     bucket_name: ${{ inputs.bucket_name }}
-      #     tfvar_file_path: ${{ inputs.tfvar_file_path }}
-      #     directory: ./oc-terraform-module-eks-setup/eks-essential-addons
-      #     approvers: ${{ inputs.approvers }}
-      #     component: eks_essential_addons
-      #     cluster_name: ${{ inputs.cluster_name }}
+      - name: Destroy eks_essential_addons
+        if: inputs.component == 'eks_essential_addons' || inputs.component == 'all'
+        uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-plan-destroy
+        with:
+          bucket_name: ${{ inputs.bucket_name }}
+          tfvar_file_path: ${{ inputs.tfvar_file_path }}
+          directory: ./oc-terraform-module-eks-setup/eks-essential-addons
+          approvers: ${{ inputs.approvers }}
+          component: eks_essential_addons
+          master_s3_directory: ${{ inputs.master_s3_directory }}
 
       - name: Destroy eks_infra
         if: inputs.component == 'eks_infra' || inputs.component == 'all'
@@ -79,4 +79,4 @@ jobs:
           directory: ./oc-terraform-module-eks-setup/eks-infra
           approvers: ${{ inputs.approvers }}
           component: eks_infra
-          cluster_name: ${{ inputs.cluster_name }}
+          master_s3_directory: ${{ inputs.master_s3_directory }}

@@ -23,8 +23,8 @@ inputs:
     description: "Component name"
     required: true
     type: string
-  cluster_name:
-    description: "Name of the cluster"
+  master_s3_directory:
+    description: "Name of the master s3 directory"
     required: true
     type: string
 
@@ -44,7 +44,7 @@ runs:
         tfvar_file_path: ${{ inputs.tfvar_file_path }}
         directory: ${{ inputs.directory }}
         component: ${{ inputs.component }}
-        cluster_name: ${{ inputs.cluster_name }}
+        master_s3_directory: ${{ inputs.master_s3_directory }}
 
     - name: Request approval
       if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
@@ -62,4 +62,4 @@ runs:
         tfvar_file_path: ${{ inputs.tfvar_file_path }}
         directory: ${{ inputs.directory }}
         component: ${{ inputs.component }}
-        cluster_name: ${{ inputs.cluster_name }}
+        master_s3_directory: ${{ inputs.master_s3_directory }}
