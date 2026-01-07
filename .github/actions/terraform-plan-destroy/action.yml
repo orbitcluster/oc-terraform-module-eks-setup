@@ -43,10 +43,12 @@ runs:
 
     - name: Terraform Plan Destroy
       shell: bash
+      if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
       working-directory: ${{ inputs.directory }}
       run: terraform plan -destroy -var-file="${{ inputs.tfvar_file_path }}"
 
     - name: Request approval for destroy
+      if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
       uses: trstringer/manual-approval@v1
       with:
         secret: ${{ github.token }}
@@ -55,6 +57,7 @@ runs:
         issue-title: "Terraform DESTROY approval required"
 
     - name: Destroy Terraform
+      if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
       uses: ./oc-terraform-module-eks-setup/.github/actions/destroy-tf
       with:
         bucket_name: ${{ inputs.bucket_name }}

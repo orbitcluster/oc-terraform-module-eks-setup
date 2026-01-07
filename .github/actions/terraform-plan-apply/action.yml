@@ -37,7 +37,7 @@ runs:
         cp ${{ inputs.tfvar_file_path }} ${{ inputs.directory }}
 
     - name: Plan Terraform
-      if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+      if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
       uses: ./oc-terraform-module-eks-setup/.github/actions/plan-tf
       with:
         bucket_name: ${{ inputs.bucket_name }}
@@ -47,7 +47,7 @@ runs:
         master_s3_directory: ${{ inputs.master_s3_directory }}
 
     - name: Request approval
-      if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+      if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
       uses: trstringer/manual-approval@v1
       with:
         secret: ${{ github.token }}
