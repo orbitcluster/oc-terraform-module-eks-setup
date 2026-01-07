@@ -59,6 +59,11 @@ jobs:
       - name: Setup Terraform
         uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-setup
 
+      - name: Set environment variables for Terraform
+        run: |
+          echo "MASTER_S3_DIRECTORY=${{ inputs.master_s3_directory }}" >> $GITHUB_ENV
+          echo "TF_STATE_BUCKET=${{ inputs.bucket_name }}" >> $GITHUB_ENV
+
       - name: Destroy eks_essential_addons
         if: inputs.component == 'eks_essential_addons' || inputs.component == 'all'
         uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-plan-destroy

@@ -1,16 +1,3 @@
-variable "terraform_state_bucket" {
-  description = "S3 bucket containing the terraform state files"
-  type        = string
-}
-
-
-
-variable "aws_region" {
-  description = "AWS region for the S3 backend"
-  type        = string
-  default     = "us-east-1"
-}
-
 variable "env" {
   description = "Environment name (dev, staging, prod)"
   type        = string

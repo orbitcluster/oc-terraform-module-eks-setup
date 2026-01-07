@@ -2,12 +2,12 @@ data "terraform_remote_state" "eks_infra" {
   backend = "s3"
 
   config = {
-    bucket = var.terraform_state_bucket
-    key    = "${data.external.master_s3_directory.result.master_s3_directory}/eks_infra/terraform.tfstate"
-    region = var.aws_region
+    bucket = data.external.pipeline_env.result.tf_state_bucket
+    key    = "${data.external.pipeline_env.result.master_s3_directory}/eks_infra/terraform.tfstate"
+    # region is picked from AWS_REGION env var set by aws-actions/configure-aws-credentials
   }
 }
 
-data "external" "master_s3_directory" {
+data "external" "pipeline_env" {
   program = ["bash", "${path.module}/get_env.sh"]
 }
