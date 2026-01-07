@@ -1,12 +1,10 @@
 #!/bin/bash
-# Retrieve environment variables and output as JSON for Terraform "external" data source
+# This script returns pipeline environment variables as JSON for Terraform's external data source
+# Required env vars: MASTER_S3_DIRECTORY, TF_STATE_BUCKET
 
-# Check if MASTER_S3_DIRECTORY is set
-if [ -z "$MASTER_S3_DIRECTORY" ]; then
-  # Write error to stderr so strict JSON parsing doesn't fail on stdout
-  echo "Error: MASTER_S3_DIRECTORY environment variable is not set." >&2
-  exit 1
-else
-  # Safely echo JSON
-  echo "{\"master_s3_directory\": \"$MASTER_S3_DIRECTORY\"}"
-fi
+cat <<EOF
+{
+  "master_s3_directory": "${MASTER_S3_DIRECTORY}",
+  "tf_state_bucket": "${TF_STATE_BUCKET}"
+}
+EOF
