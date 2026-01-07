@@ -1,0 +1,77 @@
+---
+name: infrastructure-destroy
+on:
+  workflow_call:
+    inputs:
+      bucket_name:
+        description: "Name of the S3 bucket"
+        required: true
+        type: string
+      tfvar_file_path:
+        description: "Path to the tfvar file"
+        required: true
+        type: string
+      approvers:
+        description: "List of approvers"
+        required: true
+        type: string
+      cluster_name:
+        description: "Name of the cluster"
+        required: true
+        type: string
+      component:
+        description: "Component to destroy (eks_infra, eks_essential_addons, or all)"
+        required: true
+        type: string
+
+permissions:
+  id-token: write
+  contents: read
+  issues: write
+
+jobs:
+  infrastructure-destroy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Checkout oc-terraform-module-eks-setup
+        uses: actions/checkout@v4
+        with:
+          repository: orbitcluster/oc-terraform-module-eks-setup
+          path: oc-terraform-module-eks-setup
+          ref: dk/changestrategy
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          role-to-assume: ${{ secrets.OC_ROLE_TO_ASSUME }}
+          role-session-name: githubactions-${{ github.run_id }}
+
+      - name: Setup Terraform
+        uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-setup
+
+      # - name: Destroy eks_essential_addons
+      #   if: inputs.component == 'eks_essential_addons' || inputs.component == 'all'
+      #   uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-plan-destroy
+      #   with:
+      #     bucket_name: ${{ inputs.bucket_name }}
+      #     tfvar_file_path: ${{ inputs.tfvar_file_path }}
+      #     directory: ./oc-terraform-module-eks-setup/eks-essential-addons
+      #     approvers: ${{ inputs.approvers }}
+      #     component: eks_essential_addons
+      #     cluster_name: ${{ inputs.cluster_name }}
+
+      - name: Destroy eks_infra
+        if: inputs.component == 'eks_infra' || inputs.component == 'all'
+        uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-plan-destroy
+        with:
+          bucket_name: ${{ inputs.bucket_name }}
+          tfvar_file_path: ${{ inputs.tfvar_file_path }}
+          directory: ./oc-terraform-module-eks-setup/eks-infra
+          approvers: ${{ inputs.approvers }}
+          component: eks_infra
+          cluster_name: ${{ inputs.cluster_name }}
