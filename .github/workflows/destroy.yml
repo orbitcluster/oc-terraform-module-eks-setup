@@ -1,5 +1,5 @@
 ---
-name: infrastructure-flow
+name: infrastructure-destroy
 on:
   workflow_call:
     inputs:
@@ -19,13 +19,18 @@ on:
         description: "Name of the cluster"
         required: true
         type: string
+      component:
+        description: "Component to destroy (eks_infra, eks_essential_addons, or all)"
+        required: true
+        type: string
 
 permissions:
   id-token: write
   contents: read
   issues: write
+
 jobs:
-  infrastructure-flow:
+  infrastructure-destroy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -49,8 +54,20 @@ jobs:
       - name: Setup Terraform
         uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-setup
 
-      - name: eks_infra
-        uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-plan-apply
+      - name: Destroy eks_essential_addons
+        if: inputs.component == 'eks_essential_addons' || inputs.component == 'all'
+        uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-plan-destroy
+        with:
+          bucket_name: ${{ inputs.bucket_name }}
+          tfvar_file_path: ${{ inputs.tfvar_file_path }}
+          directory: ./oc-terraform-module-eks-setup/eks-essential-addons
+          approvers: ${{ inputs.approvers }}
+          component: eks_essential_addons
+          cluster_name: ${{ inputs.cluster_name }}
+
+      - name: Destroy eks_infra
+        if: inputs.component == 'eks_infra' || inputs.component == 'all'
+        uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-plan-destroy
         with:
           bucket_name: ${{ inputs.bucket_name }}
           tfvar_file_path: ${{ inputs.tfvar_file_path }}
@@ -58,15 +75,3 @@ jobs:
           approvers: ${{ inputs.approvers }}
           component: eks_infra
           cluster_name: ${{ inputs.cluster_name }}
-
-      # - name: eks_essential_addons
-      #   uses: ./oc-terraform-module-eks-setup/.github/actions/terraform
-      #   with:
-      #     bucket_name: ${{ inputs.bucket_name }}
-      #     tfvar_file_path: ${{ inputs.tfvar_file_path }}
-      #     directory: ./oc-terraform-module-eks-setup/eks-essential-addons
-      #     approvers: ${{ inputs.approvers }}
-          # component: eks_essential_addons
-          # cluster_name: ${{ inputs.cluster_name }}
-
-      
