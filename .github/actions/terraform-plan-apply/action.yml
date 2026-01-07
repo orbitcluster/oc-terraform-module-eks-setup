@@ -54,12 +54,12 @@ runs:
         approvers: ${{ inputs.approvers }}
         minimum_approvers: 1
 
-    # - name: Apply Terraform
-    #   if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    #   uses: ./oc-terraform-module-eks-setup/.github/actions/apply-tf
-    #   with:
-    #     bucket_name: ${{ inputs.bucket_name }}
-    #     tfvar_file_path: ${{ inputs.tfvar_file_path }}
-    #     directory: ${{ inputs.directory }}
-    #     component: ${{ inputs.component }}
-    #     cluster_name: ${{ inputs.cluster_name }}
+    - name: Apply Terraform
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: ./oc-terraform-module-eks-setup/.github/actions/apply-tf
+      with:
+        bucket_name: ${{ inputs.bucket_name }}
+        tfvar_file_path: ${{ inputs.tfvar_file_path }}
+        directory: ${{ inputs.directory }}
+        component: ${{ inputs.component }}
+        cluster_name: ${{ inputs.cluster_name }}
