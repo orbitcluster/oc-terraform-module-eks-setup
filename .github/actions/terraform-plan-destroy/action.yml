@@ -50,7 +50,7 @@ runs:
       uses: trstringer/manual-approval@v1
       with:
         secret: ${{ github.token }}
-        minimum_approvers: 1
+        minimum-approvals: 1
         approvers: ${{ inputs.approvers }}
         issue-title: "Terraform DESTROY approval required"
 
