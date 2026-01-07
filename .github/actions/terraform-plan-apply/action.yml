@@ -55,7 +55,8 @@ runs:
         minimum-approvals: 1
 
     - name: Apply Terraform
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      if: github.event_name == 'push' 
+      # && github.ref == 'refs/heads/main'
       uses: ./oc-terraform-module-eks-setup/.github/actions/apply-tf
       with:
         bucket_name: ${{ inputs.bucket_name }}
