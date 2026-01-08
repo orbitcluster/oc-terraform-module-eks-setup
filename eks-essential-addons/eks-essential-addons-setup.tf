@@ -1,5 +1,5 @@
 module "eks_essential_addons" {
-  source = "git::https://github.com/orbitcluster/oc-terraform-module-essential-addons.git?ref=dff5dd7b7d98bbf594fe5e85bd9328eec472b319"
+  source = "git::https://github.com/orbitcluster/oc-terraform-module-essential-addons.git?ref=dc93b49fdbbd842dbc429e231d3429e8c63c1ddb"
 
   # Basic Cluster Info
   env    = var.env
