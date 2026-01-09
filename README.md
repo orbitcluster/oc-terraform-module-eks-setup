@@ -53,7 +53,7 @@ sequenceDiagram
     GA->>GA: Checkout Code & auth AWS
 
     %% Infrastructure Step
-    rect rgb(240, 248, 255)
+    rect rgba(0, 0, 255, 0.1)
     note right of GA: Infrastructure Provisioning
     GA->>Infra: terraform init & plan
     Infra-->>GA: Plan Output
@@ -64,7 +64,7 @@ sequenceDiagram
     end
 
     %% Addons Step
-    rect rgb(255, 248, 240)
+    rect rgba(255, 165, 0, 0.1)
     note right of GA: Addons Provisioning
     alt is main branch
         GA->>Addons: terraform init & plan
