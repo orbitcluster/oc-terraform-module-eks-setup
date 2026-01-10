@@ -79,3 +79,14 @@ jobs:
           approvers: ${{ inputs.approvers }}
           component: eks_essential_addons
           master_s3_directory: ${{ inputs.master_s3_directory }}
+
+      - name: eks_custom_addons
+        if: github.ref == 'refs/heads/main'
+        uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-plan-apply
+        with:
+          bucket_name: ${{ inputs.bucket_name }}
+          tfvar_file_path: ${{ inputs.tfvar_file_path }}
+          directory: ./oc-terraform-module-eks-setup/eks-custom-addons
+          approvers: ${{ inputs.approvers }}
+          component: eks_custom_addons
+          master_s3_directory: ${{ inputs.master_s3_directory }}
