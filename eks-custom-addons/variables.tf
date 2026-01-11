@@ -27,6 +27,12 @@ variable "tags" {
   default     = {}
 }
 
+variable "delete_retained_pvs" {
+  description = "If true, patches PVs with Retain policy to Delete before destroying cluster, ensuring EBS volumes are removed."
+  type        = bool
+  default     = false
+}
+
 ###################CUSTOM ADDONS INFO###################
 
 variable "enable_istio" {

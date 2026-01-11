@@ -3,9 +3,10 @@
 
 CLUSTER_NAME=$1
 REGION=$2
+DELETE_RETAINED_PVS=$3
 
 if [ -z "$CLUSTER_NAME" ] || [ -z "$REGION" ]; then
-  echo "Usage: $0 <cluster_name> <region>"
+  echo "Usage: $0 <cluster_name> <region> [delete_retained_pvs]"
   exit 1
 fi
 
@@ -29,6 +30,23 @@ delete_if_exists() {
 
 delete_if_exists "ingress" "Ingress resources"
 delete_if_exists "svc --field-selector spec.type=LoadBalancer" "LoadBalancer Services"
+
+if [ "$DELETE_RETAINED_PVS" == "true" ]; then
+  echo "Patching all PVs to 'Delete' reclaim policy to ensure EBS/EFS volumes are removed..."
+  # Get all PV names
+  PVS=$(kubectl get pv -o jsonpath="{.items[*].metadata.name}")
+  if [ -n "$PVS" ]; then
+    for pv in $PVS; do
+      echo "Patching PV $pv..."
+      kubectl patch pv "$pv" -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}' || echo "Warning: Failed to patch PV $pv"
+    done
+  else
+    echo "No PVs found. Skipping patch."
+  fi
+else
+  echo "Skipping PV patching (DELETE_RETAINED_PVS is not true). Retained PVs will persist."
+fi
+
 delete_if_exists "pvc" "PVCs"
 
 echo "Checking VolumeSnapshots..."
