@@ -16,7 +16,7 @@ aws eks update-kubeconfig --name "$CLUSTER_NAME" --region "$REGION"
 delete_if_exists() {
   RESOURCE_TYPE=$1
   DISPLAY_NAME=$2
-  
+
   echo "Checking $DISPLAY_NAME..."
   # Check if any resources of this type exist
   if kubectl get "$RESOURCE_TYPE" --all-namespaces --no-headers 2>/dev/null | grep -q .; then
