@@ -9,5 +9,7 @@ data "terraform_remote_state" "eks_infra" {
 }
 
 data "external" "pipeline_env" {
-  program = ["bash", "${path.module}/get_env.sh"]
+  program = ["bash", "${path.module}/scripts/get_env.sh"]
 }
+
+data "aws_region" "current" {}
