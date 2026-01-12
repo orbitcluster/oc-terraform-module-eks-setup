@@ -6,7 +6,7 @@ module "eks_custom_addons" {
   bu_id  = var.bu_id
   app_id = var.app_id
 
-  is_hub             = var.is_hub
+  is_hub = var.is_hub
 
   # Essential Addons - Values from remote state
   cluster_name                       = data.terraform_remote_state.eks_infra.outputs.cluster_name
