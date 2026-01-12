@@ -1,10 +1,12 @@
 module "eks_custom_addons" {
-  source = "git::https://github.com/orbitcluster/oc-terraform-module-custom-addons.git?ref=b9fdb7a40a6cb86f7096490879cce6490c8fbcf7"
+  source = "git::https://github.com/orbitcluster/oc-terraform-module-custom-addons.git?ref=d715865e4bd7f89f82860d95121dd889ef7cf1ba"
 
   # Basic Cluster Info
   env    = var.env
   bu_id  = var.bu_id
   app_id = var.app_id
+
+  is_hub             = var.is_hub
 
   # Essential Addons - Values from remote state
   cluster_name                       = data.terraform_remote_state.eks_infra.outputs.cluster_name
@@ -18,7 +20,6 @@ module "eks_custom_addons" {
   istio_version      = var.istio_version
   enable_kiali       = var.enable_kiali
   kiali_version      = var.kiali_version
-  enable_argocd      = var.enable_argocd
   argocd_version     = var.argocd_version
   enable_prometheus  = var.enable_prometheus
   prometheus_version = var.prometheus_version
