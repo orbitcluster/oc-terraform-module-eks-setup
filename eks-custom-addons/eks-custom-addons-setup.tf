@@ -1,12 +1,12 @@
 module "eks_custom_addons" {
-  source = "git::https://github.com/orbitcluster/oc-terraform-module-custom-addons.git?ref=d715865e4bd7f89f82860d95121dd889ef7cf1ba"
+  source = "git::https://github.com/orbitcluster/oc-terraform-module-custom-addons.git?ref=2adc698d7cf1dbf13baac8f5d56a669ee6193958"
 
   # Basic Cluster Info
   env    = var.env
   bu_id  = var.bu_id
   app_id = var.app_id
 
-  is_hub             = var.is_hub
+  is_hub = var.is_hub
 
   # Essential Addons - Values from remote state
   cluster_name                       = data.terraform_remote_state.eks_infra.outputs.cluster_name
