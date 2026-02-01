@@ -36,4 +36,3 @@ provider "kubectl" {
     args        = ["eks", "get-token", "--cluster-name", data.terraform_remote_state.eks_infra.outputs.cluster_name]
   }
 }
-
