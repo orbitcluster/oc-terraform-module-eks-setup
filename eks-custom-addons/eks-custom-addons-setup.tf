@@ -1,5 +1,5 @@
 module "eks_custom_addons" {
-  source = "git::https://github.com/orbitcluster/oc-terraform-module-custom-addons.git?ref=a2b29d016342f1bb94a8ceaf6faf8cf890caa886"
+  source = "git::https://github.com/orbitcluster/oc-terraform-module-custom-addons.git?ref=6de7f2c9becc05a1e3f372f0564c3b16e347879d"
 
   # Basic Cluster Info
   env    = var.env
