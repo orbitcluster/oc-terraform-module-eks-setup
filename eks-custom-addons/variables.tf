@@ -95,3 +95,9 @@ variable "grafana_version" {
   default     = "8.5.1" # Grafana chart 10.5.5 seems like app version. 8.x is the chart version series usually. I will use a safe recent 8.x.
   # Actually, let's use 8.5.1 to be safe, or 8.6.0.
 }
+
+variable "domain_url" {
+  description = "Base domain URL for the platform (e.g., orbitcluster.platform.com, xyz.company.com)"
+  type        = string
+  default     = "orbitcluster.platform.com"
+}
