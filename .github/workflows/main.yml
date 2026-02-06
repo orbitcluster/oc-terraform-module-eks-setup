@@ -53,6 +53,7 @@ jobs:
 
       - name: Create S3 bucket for Terraform backend
         run: |
+          chmod +x ./oc-terraform-module-eks-setup/scripts/create-tf-backend-bucket.sh
           ./oc-terraform-module-eks-setup/scripts/create-tf-backend-bucket.sh ${{ inputs.bucket_name }} us-east-1
 
       - name: Setup Terraform
