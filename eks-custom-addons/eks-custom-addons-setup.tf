@@ -1,5 +1,5 @@
 module "eks_custom_addons" {
-  source = "git::https://github.com/orbitcluster/oc-terraform-module-custom-addons.git?ref=eb11f91a2e46985c611371ba39b777a07cb4d809"
+  source = "git::https://github.com/orbitcluster/oc-terraform-module-custom-addons.git?ref=6c45c6c8614fb29cac20c57cf1cb8b70afc71817"
 
   # Basic Cluster Info
   env    = var.env
@@ -25,6 +25,7 @@ module "eks_custom_addons" {
   prometheus_version = var.prometheus_version
   enable_grafana     = var.enable_grafana
   grafana_version    = var.grafana_version
+  domain_url         = var.domain_url
 
   tags = var.tags
 }
