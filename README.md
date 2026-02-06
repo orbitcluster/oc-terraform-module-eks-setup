@@ -23,13 +23,11 @@ The deployment is managed via a GitHub Actions workflow (`.github/workflows/main
 ### Workflow Code Flow
 
 1.  **Initialization**:
-
     - The workflow is triggered via a `workflow_call`.
     - It checks out the code and configures AWS credentials using the provided role.
     - It sets up Terraform.
 
 2.  **Infrastructure Provisioning (`eks-infra`)**:
-
     - **Init & Plan**: Runs `terraform init` with the S3 backend configuration and `terraform plan` using the specified `.tfvars` file.
     - **Approval**: Pauses the workflow and waits for manual approval from the specified approvers.
     - **Apply**: Once approved, runs `terraform apply` to provision the VPC and EKS cluster.
@@ -88,19 +86,6 @@ The workflow accepts the following key inputs:
 - `approvers`: List of users allowed to approve the deployment.
 
 ## State Management
-
-This project uses **AWS S3** for state storage.
-
-- `eks-infra` state is stored at `{MASTER_S3_DIRECTORY}/eks_infra/terraform.tfstate`.
-- `eks-essential-addons` state is stored at `{MASTER_S3_DIRECTORY}/eks_essential_addons/terraform.tfstate`.
-
-The addons module uses `terraform_remote_state` to read outputs from the infrastructure module.
-
-## Modules Used
-
-- [OrbitCluster EKS Module](https://github.com/orbitcluster/oc-terraform-module-eks)
-- [OrbitCluster Networking Module](https://github.com/orbitcluster/oc-terraform-module-networking)
-- [OrbitCluster Essential Addons Module](https://github.com/orbitcluster/oc-terraform-module-essential-addons)
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements

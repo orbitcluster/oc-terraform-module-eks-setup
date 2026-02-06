@@ -51,6 +51,10 @@ jobs:
           role-to-assume: ${{ secrets.OC_ROLE_TO_ASSUME }}
           role-session-name: githubactions-${{ github.run_id }}
 
+      - name: Create S3 bucket for Terraform backend
+        run: |
+          ./oc-terraform-module-eks-setup/scripts/create-tf-backend-bucket.sh ${{ inputs.bucket_name }} us-east-1
+
       - name: Setup Terraform
         uses: ./oc-terraform-module-eks-setup/.github/actions/terraform-setup
 
