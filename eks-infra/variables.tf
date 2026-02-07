@@ -1,4 +1,10 @@
 ################ORG INFO##########################
+variable "friendly_name" {
+  type        = string
+  description = "Friendly name for the cluster"
+  default     = "root"
+}
+
 variable "bu_id" {
   description = "Business Unit"
   type        = string
