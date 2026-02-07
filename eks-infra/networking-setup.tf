@@ -1,5 +1,5 @@
 module "networking" {
-  source = "git::https://github.com/orbitcluster/oc-terraform-module-networking.git?ref=1336a1ef0fc244b82e2b5e76ec0bd738703dc5df"
+  source = "git::https://github.com/orbitcluster/oc-terraform-module-networking.git?ref=e281bdfccad53bd5554a869ad97c0ea12d3dc74f"
 
   # Basic VPC Info
   vpc_cidr             = var.vpc_cidr
@@ -41,7 +41,8 @@ module "networking" {
   enable_istio_support = var.enable_istio_support
 
   # Common Tags & Info
-  env    = var.env
-  bu_id  = var.bu_id
-  app_id = var.app_id
+  friendly_name = var.friendly_name
+  env           = var.env
+  bu_id         = var.bu_id
+  app_id        = var.app_id
 }
