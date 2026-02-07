@@ -1,7 +1,8 @@
 module "eks_infra" {
-  source = "git::https://github.com/orbitcluster/oc-terraform-module-eks.git?ref=515a294065558df2ffa0d74c25cda13ae37091a9"
+  source = "git::https://github.com/orbitcluster/oc-terraform-module-eks.git?ref=0f236248e18afc01b1716f37bfaba465af09bcb4"
 
   # Basic Cluster Info
+  friendly_name              = var.friendly_name
   cluster_kubernetes_version = var.cluster_kubernetes_version
   env                        = var.env
   bu_id                      = var.bu_id
