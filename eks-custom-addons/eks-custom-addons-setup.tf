@@ -1,5 +1,5 @@
 module "eks_custom_addons" {
-  source = "git::https://github.com/orbitcluster/oc-terraform-module-custom-addons.git?ref=2df853b5fc94ad94fed09732a703b2b83e223fcb"
+  source = "git::https://github.com/orbitcluster/oc-terraform-module-custom-addons.git?ref=b8d4d3bfd63cb12248dd3810e60d515c1756ec0a"
 
   # Basic Cluster Info
   env    = var.env
@@ -26,6 +26,10 @@ module "eks_custom_addons" {
   enable_grafana     = var.enable_grafana
   grafana_version    = var.grafana_version
   domain_url         = var.domain_url
+
+  # Hub-Spoke Configuration (for spoke clusters)
+  hub_cluster_name = var.hub_cluster_name
+  hub_account_id   = var.hub_account_id
 
   tags = var.tags
 }
