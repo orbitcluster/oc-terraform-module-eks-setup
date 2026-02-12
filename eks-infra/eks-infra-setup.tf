@@ -1,5 +1,5 @@
 module "eks_infra" {
-  source = "git::https://github.com/orbitcluster/oc-terraform-module-eks.git?ref=0f236248e18afc01b1716f37bfaba465af09bcb4"
+  source = "git::https://github.com/orbitcluster/oc-terraform-module-eks.git?ref=88c6adb4c3c736dece755f2a05ad435a3558f435"
 
   # Basic Cluster Info
   friendly_name              = var.friendly_name
